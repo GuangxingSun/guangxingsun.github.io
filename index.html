@@ -57,6 +57,10 @@
 			
 				<li><a href="/">主页</a></li>
 	        
+				<li><a href="/categories">分类</a></li>
+	        
+				<li><a href="/tags">tags</a></li>
+	        
 				<li><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
 	        
 			</ul>
@@ -119,6 +123,10 @@
 			
 				
 			
+				
+			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -138,12 +146,16 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 25%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+					<li style="width: 25%"><a href="/categories">分类</a></li>
+		        
+					<li style="width: 25%"><a href="/tags">tags</a></li>
+		        
+					<li style="width: 25%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -160,6 +172,133 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-30个常用的maven命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/12/30%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%9A%84maven%E5%91%BD%E4%BB%A4/">30个常用的maven命令</a>
+    </h1>
+  
+
+        
+        <a href="/2020/06/12/30%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%9A%84maven%E5%91%BD%E4%BB%A4/" class="archive-article-date">
+  	<time datetime="2020-06-12T07:00:04.840Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+     
+
+	
+		<p> <strong>maven 命令的格式为 mvn [plugin-name]:[goal-name]，可以接受的参数如下。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-D 指定参数，如 -Dmaven.test.skip=<span class="keyword">true</span> 跳过单元测试；</span><br><span class="line">-P 指定 Profile 配置，可以用于区分环境；</span><br><span class="line">-e 显示maven运行出错的信息；</span><br><span class="line">-o 离线执行命令,即不去远程仓库更新包；</span><br><span class="line">-X 显示maven允许的debug信息；</span><br><span class="line">-U 强制去远程更新snapshot的插件或依赖，默认每天只更新一次。</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>常用命令</em></strong></p>
+<ol>
+<li><p>创建maven项目：mvn archetype:create </p>
+<p>指定 group： -DgroupId=packageName </p>
+<p>指定 artifact：-DartifactId=projectName</p>
+<p>创建web项目：-DarchetypeArtifactId=maven-archetype-webapp  </p>
+</li>
+<li><p>创建maven项目：mvn archetype:generate</p>
+</li>
+<li><p>验证项目是否正确：mvn validate</p>
+</li>
+<li><p>maven 打包：mvn package</p>
+</li>
+<li><p>只打jar包：mvn jar:jar</p>
+</li>
+<li><p>生成源码jar包：mvn source:jar</p>
+</li>
+<li><p>产生应用需要的任何额外的源代码：mvn generate-sources</p>
+</li>
+<li><p>编译源代码： mvn compile</p>
+</li>
+<li><p>编译测试代码：mvn test-compile</p>
+</li>
+<li><p>运行测试：mvn test</p>
+</li>
+<li><p>运行检查：mvn verify</p>
+</li>
+<li><p>清理maven项目：mvn clean</p>
+</li>
+<li><p>生成eclipse项目：mvn eclipse:eclipse</p>
+</li>
+<li><p>清理eclipse配置：mvn eclipse:clean</p>
+</li>
+<li><p>生成idea项目：mvn idea:idea</p>
+</li>
+<li><p>安装项目到本地仓库：mvn install</p>
+</li>
+<li><p>发布项目到远程仓库：mvn:deploy</p>
+</li>
+<li><p>在集成测试可以运行的环境中处理和发布包：mvn integration-test</p>
+</li>
+<li><p>显示maven依赖树：mvn dependency:tree</p>
+</li>
+<li><p>显示maven依赖列表：mvn dependency:list</p>
+</li>
+<li><p>下载依赖包的源码：mvn dependency:sources</p>
+</li>
+<li><p>安装本地jar到本地仓库：mvn install:install-file -DgroupId=packageName -DartifactId=projectName -Dversion=version -Dpackaging=jar -Dfile=path</p>
+</li>
+</ol>
+<p><strong><em>web相关命令</em></strong></p>
+<ol>
+<li>启动tomcat：mvn tomcat:run</li>
+<li>启动jetty：mvn jetty:run</li>
+<li>运行打包部署：mvn tomcat:deploy</li>
+<li>撤销部署：mvn tomcat:undeploy</li>
+<li>启动web应用：mvn tomcat:start</li>
+<li>停止web应用：mvn tomcat:stop</li>
+<li>重新部署：mvn tomcat:redeploy</li>
+<li>部署展开的war文件：mvn war:exploded tomcat:exploded </li>
+</ol>
+
+	
+
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/06/12/30%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%9A%84maven%E5%91%BD%E4%BB%A4/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-MarkDown使用教程-初级" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -167,20 +306,22 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/12/MarkDown%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-%E5%88%9D%E7%BA%A7/">MarkDown使用教程-初级</a>
+      <a class="article-title" href="/2019/08/12/MarkDown%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-%E5%88%9D%E7%BA%A7/">MarkDown使用教程-初级</a>
     </h1>
   
 
         
-        <a href="/2020/06/12/MarkDown%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-%E5%88%9D%E7%BA%A7/" class="archive-article-date">
-  	<time datetime="2020-06-12T06:05:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-12</time>
+        <a href="/2019/08/12/MarkDown%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-%E5%88%9D%E7%BA%A7/" class="archive-article-date">
+  	<time datetime="2019-08-12T06:05:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
+     
+
+	
+		<blockquote>
 <p><strong><em>为了直观展示编辑页面，用java代码块来编写呈现原生编辑内容</em></strong></p>
 </blockquote>
 <h2 id="1-标题"><a href="#1-标题" class="headerlink" title="1. 标题"></a>1. 标题</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">##### 五级标题</span><br><span class="line">###### 六级标题</span><br></pre></td></tr></table></figure>
@@ -298,93 +439,36 @@ Guangxing
 <h2 id="10-流程图"><a href="#10-流程图" class="headerlink" title="10. 流程图"></a>10. 流程图</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">​```flow</span><br><span class="line">st=&gt;start: 开始</span><br><span class="line">op=&gt;operation: My Operation</span><br><span class="line">cond=&gt;condition: Yes or No?</span><br><span class="line">e=&gt;end</span><br><span class="line">st-&gt;op-&gt;cond</span><br><span class="line">cond(yes)-&gt;e</span><br><span class="line">cond(no)-&gt;op</span><br><span class="line">&amp;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 显示效果</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;flow</span><br><span class="line">st&#x3D;&gt;start: 开始</span><br><span class="line">op&#x3D;&gt;operation: My Operation</span><br><span class="line">cond&#x3D;&gt;condition: Yes or No?</span><br><span class="line">e&#x3D;&gt;end</span><br><span class="line">st-&gt;op-&gt;cond</span><br><span class="line">cond(yes)-&gt;e</span><br><span class="line">cond(no)-&gt;op</span><br><span class="line">&amp;</span><br></pre></td></tr></table></figure>
 <pre><code></code></pre>
-      
+	
 
-      
     </div>
     <div class="article-info article-info-index">
       
       
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/docker//" class="article-tag-list-link color2">docker</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/docker/hexo//" class="article-tag-list-link color5">hexo</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/docker/hexo/linux//" class="article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/12/MarkDown%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-%E5%88%9D%E7%BA%A7/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/08/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/08/hello-world/" class="archive-article-date">
-  	<time datetime="2020-06-08T14:36:20.291Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/08/hello-world/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/08/12/MarkDown%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-%E5%88%9D%E7%BA%A7/">展开全文 >></a>
         </p>
       
 
