@@ -172,20 +172,20 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-30个常用的maven命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-使用docker-Volume挂载方法运行nginx" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/12/30%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%9A%84maven%E5%91%BD%E4%BB%A4/">30个常用的maven命令</a>
+      <a class="article-title" href="/2020/06/12/%E4%BD%BF%E7%94%A8docker-Volume%E6%8C%82%E8%BD%BD%E6%96%B9%E6%B3%95%E8%BF%90%E8%A1%8Cnginx/">使用docker Volume挂载方法运行nginx</a>
     </h1>
   
 
         
-        <a href="/2020/06/12/30%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%9A%84maven%E5%91%BD%E4%BB%A4/" class="archive-article-date">
-  	<time datetime="2020-06-12T07:00:04.840Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-12</time>
+        <a href="/2020/06/12/%E4%BD%BF%E7%94%A8docker-Volume%E6%8C%82%E8%BD%BD%E6%96%B9%E6%B3%95%E8%BF%90%E8%A1%8Cnginx/" class="archive-article-date">
+  	<time datetime="2020-06-12T07:04:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-12</time>
 </a>
         
       </header>
@@ -194,7 +194,124 @@
      
 
 	
-		<p> <strong>maven 命令的格式为 mvn [plugin-name]:[goal-name]，可以接受的参数如下。</strong></p>
+		<blockquote>
+<p>Docker nginx容器启动后配置文件的修改获取有些不便，之前是通过cp方式来进行替换加载，现在使用Volume实现裙带机制修改文件内容。下面主要分为HTML、Log、Config三个文件挂载。</p>
+</blockquote>
+<ol>
+<li><p>创建volume</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker volume create myNginxLog    #日志信息</span><br><span class="line">docker volume create myNginxConfig #配置信息</span><br><span class="line">docker volume create myNginxHtml	 #网站信息</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建容器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -it -p 8088:80 --name=mynginx -v myNginxHtml:/usr/share/nginx/html -v myNginxConfig:/etc/nginx -v myNginxLog:/var/log/nginx  nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看各volume在宿主机存在位置</p>
+<p><em>以myNginxConfig为例：</em></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker volume inspect myNginxConfig</span><br></pre></td></tr></table></figure>
+
+<p>我测试输出为：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">       <span class="attr">"Driver"</span>: <span class="string">"local"</span>,</span><br><span class="line">       <span class="attr">"Labels"</span>: &#123;&#125;,</span><br><span class="line">       <span class="attr">"Mountpoint"</span>: <span class="string">"/var/lib/docker/volumes/myNginxConfig/_data"</span>,</span><br><span class="line">       <span class="attr">"Name"</span>: <span class="string">"myNginxConfig"</span>,</span><br><span class="line">       <span class="attr">"Options"</span>: &#123;&#125;,</span><br><span class="line">       <span class="attr">"Scope"</span>: <span class="string">"local"</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在/var/lib/docker/volumes/myNginxConfig/_data 文件下就可以找到相关文件夹</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">[root]#</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/var/lib/docker/volumes/myNginxConfig/_data</span><br><span class="line"><span class="meta">[root]#</span><span class="bash"> ls</span></span><br><span class="line">conf.d          koi-utf  mime.types  nginx.conf   uwsgi_params</span><br><span class="line">fastcgi_params  koi-win  modules     scgi_params  win-utf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改default.conf</p>
+<ul>
+<li>进入/var/lib/docker/volumes/myNginxConfig/_data/conf.d</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">[root]#</span><span class="bash"> <span class="built_in">cd</span> /var/lib/docker/volumes/myNginxConfig/_data/conf.d</span></span><br><span class="line"><span class="meta">[root]#</span><span class="bash"> ls</span></span><br><span class="line">default.conf</span><br><span class="line"><span class="meta">[root]#</span><span class="bash"> vim default.conf</span></span><br><span class="line"><span class="meta">#</span><span class="bash">按照个人实际项目情况修改配置文件，并且保存退出。</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看容器中default.conf配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it 容器id bash</span><br><span class="line">cd &#x2F;etc&#x2F;nginx&#x2F;conf.d</span><br><span class="line">cat default.conf</span><br><span class="line">#此时发现通过宿主机修改的配置文件成功同步到容器中</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>容器重新加载配置文件（支持热部署，不用重启容器奥）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -i [nginx容器名/id] nginx -s reload</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>OK 大功告成！</p>
+</li>
+</ol>
+
+	
+
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/docker//" class="article-tag-list-link color2">docker</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/docker/volume//" class="article-tag-list-link color2">volume</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/docker/volume/nginx//" class="article-tag-list-link color1">nginx</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/06/12/%E4%BD%BF%E7%94%A8docker-Volume%E6%8C%82%E8%BD%BD%E6%96%B9%E6%B3%95%E8%BF%90%E8%A1%8Cnginx/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-30个常用的maven命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/12/30%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%9A%84maven%E5%91%BD%E4%BB%A4/">30个常用的maven命令</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/12/30%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%9A%84maven%E5%91%BD%E4%BB%A4/" class="archive-article-date">
+  	<time datetime="2020-03-12T06:57:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+     
+
+	
+		<p><strong>maven 命令的格式为 mvn [plugin-name]:[goal-name]，可以接受的参数如下。</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-D 指定参数，如 -Dmaven.test.skip=<span class="keyword">true</span> 跳过单元测试；</span><br><span class="line">-P 指定 Profile 配置，可以用于区分环境；</span><br><span class="line">-e 显示maven运行出错的信息；</span><br><span class="line">-o 离线执行命令,即不去远程仓库更新包；</span><br><span class="line">-X 显示maven允许的debug信息；</span><br><span class="line">-U 强制去远程更新snapshot的插件或依赖，默认每天只更新一次。</span><br></pre></td></tr></table></figure>
 
 <p><strong><em>常用命令</em></strong></p>
@@ -266,10 +383,25 @@
       
       
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/maven//" class="article-tag-list-link color1">maven</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/maven/java//" class="article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/12/30%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%9A%84maven%E5%91%BD%E4%BB%A4/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/03/12/30%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%9A%84maven%E5%91%BD%E4%BB%A4/">展开全文 >></a>
         </p>
       
 
