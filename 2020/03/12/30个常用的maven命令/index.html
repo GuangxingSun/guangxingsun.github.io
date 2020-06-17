@@ -53,7 +53,7 @@
 		  <h1 class="header-author"><a href="/">Guangxing</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">减肥中……</p>
+		<p class="header-subtitle">丈夫志四海，万里犹比邻</p>
 		
 
 		<nav class="header-menu">
@@ -119,7 +119,7 @@
 			  <h1 class="header-author js-header-author">Guangxing</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>减肥中……<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>丈夫志四海，万里犹比邻<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -193,6 +193,77 @@
       </header>
     
     <div class="article-entry" itemprop="articleBody">
+	<div class="article-entry" itemprop="articleBody">
+    
+        
+        <p><strong>maven 命令的格式为 mvn [plugin-name]:[goal-name]，可以接受的参数如下。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-D 指定参数，如 -Dmaven.test.skip=<span class="keyword">true</span> 跳过单元测试；</span><br><span class="line">-P 指定 Profile 配置，可以用于区分环境；</span><br><span class="line">-e 显示maven运行出错的信息；</span><br><span class="line">-o 离线执行命令,即不去远程仓库更新包；</span><br><span class="line">-X 显示maven允许的debug信息；</span><br><span class="line">-U 强制去远程更新snapshot的插件或依赖，默认每天只更新一次。</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>常用命令</em></strong></p>
+<ol>
+<li><p>创建maven项目：mvn archetype:create </p>
+<p>指定 group： -DgroupId=packageName </p>
+<p>指定 artifact：-DartifactId=projectName</p>
+<p>创建web项目：-DarchetypeArtifactId=maven-archetype-webapp  </p>
+</li>
+<li><p>创建maven项目：mvn archetype:generate</p>
+</li>
+<li><p>验证项目是否正确：mvn validate</p>
+</li>
+<li><p>maven 打包：mvn package</p>
+</li>
+<li><p>只打jar包：mvn jar:jar</p>
+</li>
+<li><p>生成源码jar包：mvn source:jar</p>
+</li>
+<li><p>产生应用需要的任何额外的源代码：mvn generate-sources</p>
+</li>
+<li><p>编译源代码： mvn compile</p>
+</li>
+<li><p>编译测试代码：mvn test-compile</p>
+</li>
+<li><p>运行测试：mvn test</p>
+</li>
+<li><p>运行检查：mvn verify</p>
+</li>
+<li><p>清理maven项目：mvn clean</p>
+</li>
+<li><p>生成eclipse项目：mvn eclipse:eclipse</p>
+</li>
+<li><p>清理eclipse配置：mvn eclipse:clean</p>
+</li>
+<li><p>生成idea项目：mvn idea:idea</p>
+</li>
+<li><p>安装项目到本地仓库：mvn install</p>
+</li>
+<li><p>发布项目到远程仓库：mvn:deploy</p>
+</li>
+<li><p>在集成测试可以运行的环境中处理和发布包：mvn integration-test</p>
+</li>
+<li><p>显示maven依赖树：mvn dependency:tree</p>
+</li>
+<li><p>显示maven依赖列表：mvn dependency:list</p>
+</li>
+<li><p>下载依赖包的源码：mvn dependency:sources</p>
+</li>
+<li><p>安装本地jar到本地仓库：mvn install:install-file -DgroupId=packageName -DartifactId=projectName -Dversion=version -Dpackaging=jar -Dfile=path</p>
+</li>
+</ol>
+<p><strong><em>web相关命令</em></strong></p>
+<ol>
+<li>启动tomcat：mvn tomcat:run</li>
+<li>启动jetty：mvn jetty:run</li>
+<li>运行打包部署：mvn tomcat:deploy</li>
+<li>撤销部署：mvn tomcat:undeploy</li>
+<li>启动web应用：mvn tomcat:start</li>
+<li>停止web应用：mvn tomcat:stop</li>
+<li>重新部署：mvn tomcat:redeploy</li>
+<li>部署展开的war文件：mvn war:exploded tomcat:exploded </li>
+</ol>
+
+    
+</div>
+
       
         <p><strong>maven 命令的格式为 mvn [plugin-name]:[goal-name]，可以接受的参数如下。</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-D 指定参数，如 -Dmaven.test.skip=<span class="keyword">true</span> 跳过单元测试；</span><br><span class="line">-P 指定 Profile 配置，可以用于区分环境；</span><br><span class="line">-e 显示maven运行出错的信息；</span><br><span class="line">-o 离线执行命令,即不去远程仓库更新包；</span><br><span class="line">-X 显示maven允许的debug信息；</span><br><span class="line">-U 强制去远程更新snapshot的插件或依赖，默认每天只更新一次。</span><br></pre></td></tr></table></figure>

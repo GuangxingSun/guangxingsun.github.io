@@ -49,7 +49,7 @@
 		  <h1 class="header-author"><a href="/">Guangxing</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">减肥中……</p>
+		<p class="header-subtitle">丈夫志四海，万里犹比邻</p>
 		
 
 		<nav class="header-menu">
@@ -115,7 +115,7 @@
 			  <h1 class="header-author js-header-author">Guangxing</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>减肥中……<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>丈夫志四海，万里犹比邻<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -191,6 +191,24 @@
       </header>
     
     <div class="article-entry" itemprop="articleBody">
+	<div class="article-entry" itemprop="articleBody">
+    
+        
+        <p>​        <strong>AOP</strong>: 使用的主要是<strong><em>动态代理</em></strong> ， 过滤器使用的主要是<strong><em>函数回调</em></strong>；拦截器使用是<strong><em>反射机制</em></strong> 。</p>
+<p>一个请求过来 ，先进行过滤器处理，看程序是否受理该请求 。 过滤器放过后 ， 程序中的拦截器进行处理 ，处理完后进入 被 AOP动态代理重新编译过的主要业务类进行处理 。</p>
+<p>​        <strong>Filter</strong>：和<strong><em>框架无关</em></strong>，可以控制最初的http请求，但是更细一点的类和方法控制不了。</p>
+<p>​        <strong>Interceptor</strong>：可以<strong><em>控制请求的控制器和方法</em></strong>，但控制不了请求方法里的参数（用于处理页面提交的请求响应并进行处理，例如做国际化，做主题更换，过滤等）。</p>
+<p>​        <strong>Aspect</strong> : 可以自定义切入的点，<strong><em>可以操作方法的参数</em></strong>，但是拿不到http请求，可以通过其他方式如RequestContextHolder获得。</p>
+<p>​        <strong>Filter，Interceptor，Aspect</strong> 实际上都是<strong>对Aop的具体实现</strong>。都是对业务逻辑的提取。都可以实现权限检查，日志记录。不同的是使用的范围不同，规范不同，深度不同。</p>
+<hr>
+<p>​        <strong>总结</strong> </p>
+<p>​        执行顺序 ：过滤前 - 拦截前 - aspect 开始执行- controller逻辑处理 - - aspect 结束 - 拦截后 - 过滤后。</p>
+<p>Filter 是 java web 里面的，肯定获取不到 spring 里面 Controller 的信息。</p>
+<p>Interceptor、Aspect 是和 spring 相关的，所以能获取到 Controller 的信息。</p>
+
+    
+</div>
+
       
         <p>​        <strong>AOP</strong>: 使用的主要是<strong><em>动态代理</em></strong> ， 过滤器使用的主要是<strong><em>函数回调</em></strong>；拦截器使用是<strong><em>反射机制</em></strong> 。</p>
 <p>一个请求过来 ，先进行过滤器处理，看程序是否受理该请求 。 过滤器放过后 ， 程序中的拦截器进行处理 ，处理完后进入 被 AOP动态代理重新编译过的主要业务类进行处理 。</p>
@@ -278,6 +296,48 @@
       </header>
     
     <div class="article-entry" itemprop="articleBody">
+	<div class="article-entry" itemprop="articleBody">
+    
+        
+        <blockquote>
+<p>Docker nginx容器启动后配置文件的修改获取有些不便，之前是通过cp方式来进行替换加载，现在使用Volume实现裙带机制修改文件内容。下面主要分为HTML、Log、Config三个文件挂载。</p>
+</blockquote>
+<ol>
+<li><p>创建volume</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker volume create myNginxLog    #日志信息</span><br><span class="line">docker volume create myNginxConfig #配置信息</span><br><span class="line">docker volume create myNginxHtml	 #网站信息</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建容器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -it -p 8088:80 --name=mynginx -v myNginxHtml:/usr/share/nginx/html -v myNginxConfig:/etc/nginx -v myNginxLog:/var/log/nginx  nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看各volume在宿主机存在位置</p>
+<p><em>以myNginxConfig为例：</em></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker volume inspect myNginxConfig</span><br></pre></td></tr></table></figure>
+
+<p>我测试输出为：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">       <span class="attr">"Driver"</span>: <span class="string">"local"</span>,</span><br><span class="line">       <span class="attr">"Labels"</span>: &#123;&#125;,</span><br><span class="line">       <span class="attr">"Mountpoint"</span>: <span class="string">"/var/lib/docker/volumes/myNginxConfig/_data"</span>,</span><br><span class="line">       <span class="attr">"Name"</span>: <span class="string">"myNginxConfig"</span>,</span><br><span class="line">       <span class="attr">"Options"</span>: &#123;&#125;,</span><br><span class="line">       <span class="attr">"Scope"</span>: <span class="string">"local"</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在/var/lib/docker/volumes/myNginxConfig/_data 文件下就可以找到相关文件夹</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">[root]#</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/var/lib/docker/volumes/myNginxConfig/_data</span><br><span class="line"><span class="meta">[root]#</span><span class="bash"> ls</span></span><br><span class="line">conf.d          koi-utf  mime.types  nginx.conf   uwsgi_params</span><br><span class="line">fastcgi_params  koi-win  modules     scgi_params  win-utf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改default.conf</p>
+<ul>
+<li>进入/var/lib/docker/volumes/myNginxConfig/_data/conf.d</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">[root]#</span><span class="bash"> <span class="built_in">cd</span> /var/lib/docker/volumes/myNginxConfig/_data/conf.d</span></span><br><span class="line"><span class="meta">[root]#</span><span class="bash"> ls</span></span><br><span class="line">default.conf</span><br><span class="line"><span class="meta">[root]#</span><span class="bash"> vim default.conf</span></span><br><span class="line"><span class="meta">#</span><span class="bash">按照个人实际项目情况修改配置文件，并且保存退出。</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看容器中default.conf配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it 容器id bash</span><br><span class="line">cd &#x2F;etc&#x2F;nginx&#x2F;conf.d</span><br><span class="line">cat default.conf</span><br><span class="line">#此时发现通过宿主机修改的配置文件成功同步到容器中</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>容器重新加载配置文件（支持热部署，不用重启容器奥）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -i [nginx容器名/id] nginx -s reload</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>OK 大功告成！</p>
+</li>
+</ol>
+
+    
+</div>
+
       
         <blockquote>
 <p>Docker nginx容器启动后配置文件的修改获取有些不便，之前是通过cp方式来进行替换加载，现在使用Volume实现裙带机制修改文件内容。下面主要分为HTML、Log、Config三个文件挂载。</p>
@@ -332,11 +392,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="/categories/docker/volume//" class="article-tag-list-link color2">volume</a>
+        			<a href="/categories/docker/Volume//" class="article-tag-list-link color2">Volume</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="/categories/docker/volume/nginx//" class="article-tag-list-link color1">nginx</a>
+        			<a href="/categories/nginx//" class="article-tag-list-link color1">nginx</a>
         		</li>
       		
 		</ul>
@@ -393,6 +453,77 @@
       </header>
     
     <div class="article-entry" itemprop="articleBody">
+	<div class="article-entry" itemprop="articleBody">
+    
+        
+        <p><strong>maven 命令的格式为 mvn [plugin-name]:[goal-name]，可以接受的参数如下。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-D 指定参数，如 -Dmaven.test.skip=<span class="keyword">true</span> 跳过单元测试；</span><br><span class="line">-P 指定 Profile 配置，可以用于区分环境；</span><br><span class="line">-e 显示maven运行出错的信息；</span><br><span class="line">-o 离线执行命令,即不去远程仓库更新包；</span><br><span class="line">-X 显示maven允许的debug信息；</span><br><span class="line">-U 强制去远程更新snapshot的插件或依赖，默认每天只更新一次。</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>常用命令</em></strong></p>
+<ol>
+<li><p>创建maven项目：mvn archetype:create </p>
+<p>指定 group： -DgroupId=packageName </p>
+<p>指定 artifact：-DartifactId=projectName</p>
+<p>创建web项目：-DarchetypeArtifactId=maven-archetype-webapp  </p>
+</li>
+<li><p>创建maven项目：mvn archetype:generate</p>
+</li>
+<li><p>验证项目是否正确：mvn validate</p>
+</li>
+<li><p>maven 打包：mvn package</p>
+</li>
+<li><p>只打jar包：mvn jar:jar</p>
+</li>
+<li><p>生成源码jar包：mvn source:jar</p>
+</li>
+<li><p>产生应用需要的任何额外的源代码：mvn generate-sources</p>
+</li>
+<li><p>编译源代码： mvn compile</p>
+</li>
+<li><p>编译测试代码：mvn test-compile</p>
+</li>
+<li><p>运行测试：mvn test</p>
+</li>
+<li><p>运行检查：mvn verify</p>
+</li>
+<li><p>清理maven项目：mvn clean</p>
+</li>
+<li><p>生成eclipse项目：mvn eclipse:eclipse</p>
+</li>
+<li><p>清理eclipse配置：mvn eclipse:clean</p>
+</li>
+<li><p>生成idea项目：mvn idea:idea</p>
+</li>
+<li><p>安装项目到本地仓库：mvn install</p>
+</li>
+<li><p>发布项目到远程仓库：mvn:deploy</p>
+</li>
+<li><p>在集成测试可以运行的环境中处理和发布包：mvn integration-test</p>
+</li>
+<li><p>显示maven依赖树：mvn dependency:tree</p>
+</li>
+<li><p>显示maven依赖列表：mvn dependency:list</p>
+</li>
+<li><p>下载依赖包的源码：mvn dependency:sources</p>
+</li>
+<li><p>安装本地jar到本地仓库：mvn install:install-file -DgroupId=packageName -DartifactId=projectName -Dversion=version -Dpackaging=jar -Dfile=path</p>
+</li>
+</ol>
+<p><strong><em>web相关命令</em></strong></p>
+<ol>
+<li>启动tomcat：mvn tomcat:run</li>
+<li>启动jetty：mvn jetty:run</li>
+<li>运行打包部署：mvn tomcat:deploy</li>
+<li>撤销部署：mvn tomcat:undeploy</li>
+<li>启动web应用：mvn tomcat:start</li>
+<li>停止web应用：mvn tomcat:stop</li>
+<li>重新部署：mvn tomcat:redeploy</li>
+<li>部署展开的war文件：mvn war:exploded tomcat:exploded </li>
+</ol>
+
+    
+</div>
+
       
         <p><strong>maven 命令的格式为 mvn [plugin-name]:[goal-name]，可以接受的参数如下。</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-D 指定参数，如 -Dmaven.test.skip=<span class="keyword">true</span> 跳过单元测试；</span><br><span class="line">-P 指定 Profile 配置，可以用于区分环境；</span><br><span class="line">-e 显示maven运行出错的信息；</span><br><span class="line">-o 离线执行命令,即不去远程仓库更新包；</span><br><span class="line">-X 显示maven允许的debug信息；</span><br><span class="line">-U 强制去远程更新snapshot的插件或依赖，默认每天只更新一次。</span><br></pre></td></tr></table></figure>
@@ -533,6 +664,130 @@
       </header>
     
     <div class="article-entry" itemprop="articleBody">
+	<div class="article-entry" itemprop="articleBody">
+    
+        
+        <blockquote>
+<p><strong><em>为了直观展示编辑页面，用java代码块来编写呈现原生编辑内容</em></strong></p>
+</blockquote>
+<h2 id="1-标题"><a href="#1-标题" class="headerlink" title="1. 标题"></a>1. 标题</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">##### 五级标题</span><br><span class="line">###### 六级标题</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>展示效果</p>
+<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6></li>
+</ul>
+<h2 id="2-字体"><a href="#2-字体" class="headerlink" title="2. 字体"></a>2. 字体</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">*斜体*</span><br><span class="line">**粗体**</span><br><span class="line">***斜体-粗体***</span><br><span class="line"></span><br><span class="line">&lt;font face="黑体"&gt;我是黑体字&lt;/font&gt;</span><br><span class="line">&lt;font face="微软雅黑"&gt;我是微软雅黑&lt;/font&gt;</span><br><span class="line">&lt;font face="STCAIYUN"&gt;我是华文彩云&lt;/font&gt;</span><br><span class="line">&lt;font color=red&gt;我是红色&lt;/font&gt;</span><br><span class="line">&lt;font color=#008000&gt;我是绿色&lt;/font&gt;</span><br><span class="line">&lt;font color=Blue&gt;我是蓝色&lt;/font&gt;</span><br><span class="line">&lt;font size=5&gt;我是尺寸&lt;/font&gt;</span><br><span class="line">&lt;font face="黑体" color=green size=5&gt;我是黑体，绿色，尺寸为5&lt;/font&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>显示效果</li>
+</ul>
+<p><em>斜体</em><br><strong>粗体</strong><br><strong><em>斜体-粗体</em></strong></p>
+<p><font face="黑体">我是黑体字</font><br><font face="微软雅黑">我是微软雅黑</font><br><font face="STCAIYUN">我是华文彩云</font><br><font color="red">我是红色</font><br><font color="#008000">我是绿色</font><br><font color="Blue">我是蓝色</font><br><font size="5">我是尺寸</font><br><font face="黑体" color="green" size="5">我是黑体，绿色，尺寸为5</font></p>
+<h2 id="3-引用"><a href="#3-引用" class="headerlink" title="3. 引用"></a>3. 引用</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;一级引用</span><br><span class="line">&gt;&gt;二级引用</span><br><span class="line">&gt;&gt;&gt;三级引用</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>显示效果</li>
+</ul>
+<blockquote>
+<p>一级引用</p>
+<blockquote>
+<p>二级引用</p>
+<blockquote>
+<p>三级引用</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="4-图片操作"><a href="#4-图片操作" class="headerlink" title="4. 图片操作"></a>4. 图片操作</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//简单图片引入(默认剧中)</span></span><br><span class="line">![引入网络图片](https:<span class="comment">//profile.csdnimg.cn/7/9/F/1_sun1042445773)</span></span><br><span class="line"><span class="comment">//图片居左</span></span><br><span class="line">&lt;img src=<span class="string">'https://profile.csdnimg.cn/7/9/F/1_sun1042445773'</span> align=<span class="string">'left'</span> style=<span class="string">' width:300px;height:100 px'</span>/&gt;</span><br><span class="line"><span class="comment">//图片加标注</span></span><br><span class="line">&lt;center&gt;</span><br><span class="line">&lt;img src=<span class="string">"https://profile.csdnimg.cn/7/9/F/1_sun1042445773"</span> width=<span class="string">"25%"</span> height=<span class="string">"25%"</span> /&gt;</span><br><span class="line">Guangxing</span><br><span class="line">&lt;/center&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>显示效果</li>
+</ul>
+<p><img src="https://profile.csdnimg.cn/7/9/F/1_sun1042445773" alt="引入网络图片"></p>
+<img src="https://profile.csdnimg.cn/7/9/F/1_sun1042445773" align="left" style=" width:300px;height:100 px">
+
+
+
+
+<center>
+<img src="https://profile.csdnimg.cn/7/9/F/1_sun1042445773" width="25%" height="25%">
+Guangxing
+</center>
+
+
+<h2 id="5-分割线"><a href="#5-分割线" class="headerlink" title="5. 分割线"></a>5. 分割线</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">***</span><br><span class="line">___</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>显示效果</li>
+</ul>
+<hr>
+<hr>
+<hr>
+<h2 id="6-超链接"><a href="#6-超链接" class="headerlink" title="6. 超链接"></a>6. 超链接</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;font face=<span class="string">"黑体"</span> a:&gt;[csdn博客地址](https:<span class="comment">//blog.csdn.net/sun1042445773)&lt;/font&gt;</span></span><br><span class="line">&lt;a href="https://blog.csdn.net/sun1042445773" title="超链接title"&gt;csdn博客地址&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>显示效果</p>
+<p><a href="https://blog.csdn.net/sun1042445773" target="_blank" rel="noopener">csdn博客地址</a></p>
+<p><a href="https://blog.csdn.net/sun1042445773" target="_blank" rel="noopener" title="超链接title">csdn博客地址</a></p>
+</li>
+</ul>
+<h2 id="7-列表"><a href="#7-列表" class="headerlink" title="7. 列表"></a>7. 列表</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//有序列表</span></span><br><span class="line"><span class="number">1</span>. 首页</span><br><span class="line"><span class="number">2</span>. 分类</span><br><span class="line"><span class="number">3</span>. 标题</span><br><span class="line"><span class="comment">//无需列表</span></span><br><span class="line">- 无需列表-</span><br><span class="line">* 无需列表*</span><br><span class="line">+ 无需列表+</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>显示效果</li>
+</ul>
+<ol>
+<li>首页</li>
+<li>分类</li>
+<li>标题</li>
+</ol>
+<ul>
+<li>无需列表-</li>
+</ul>
+<ul>
+<li>无需列表*</li>
+<li>无需列表+</li>
+</ul>
+<h2 id="8-表格"><a href="#8-表格" class="headerlink" title="8. 表格"></a>8. 表格</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> | 水果        | 价格    |  数量  |</span><br><span class="line"> | --------   | -----:   | :----: |</span><br><span class="line"> | 香蕉        | $<span class="number">1</span>      |   <span class="number">5</span>    |</span><br><span class="line"> | 苹果        | $<span class="number">1</span>      |   <span class="number">6</span>    |</span><br><span class="line"> | 草莓        | $<span class="number">1</span>      |   <span class="number">7</span>    |</span><br><span class="line"> </span><br><span class="line"><span class="comment">//或者邮件直接插入表格</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>水果</th>
+<th align="center">价格</th>
+<th align="center">数量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>香蕉</td>
+<td align="center">$1</td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td>苹果</td>
+<td align="center">$1</td>
+<td align="center">6</td>
+</tr>
+<tr>
+<td>草莓</td>
+<td align="center">$1</td>
+<td align="center">7</td>
+</tr>
+</tbody></table>
+<h2 id="9-代码块"><a href="#9-代码块" class="headerlink" title="9. 代码块"></a>9. 代码块</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">​```java</span><br><span class="line">​```shell</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>显示效果</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Test</span><span class="params">()</span></span>&#123;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd reload</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-流程图"><a href="#10-流程图" class="headerlink" title="10. 流程图"></a>10. 流程图</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">​```flow</span><br><span class="line">st=&gt;start: 开始</span><br><span class="line">op=&gt;operation: My Operation</span><br><span class="line">cond=&gt;condition: Yes or No?</span><br><span class="line">e=&gt;end</span><br><span class="line">st-&gt;op-&gt;cond</span><br><span class="line">cond(yes)-&gt;e</span><br><span class="line">cond(no)-&gt;op</span><br><span class="line">&amp;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 显示效果</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;flow</span><br><span class="line">st&#x3D;&gt;start: 开始</span><br><span class="line">op&#x3D;&gt;operation: My Operation</span><br><span class="line">cond&#x3D;&gt;condition: Yes or No?</span><br><span class="line">e&#x3D;&gt;end</span><br><span class="line">st-&gt;op-&gt;cond</span><br><span class="line">cond(yes)-&gt;e</span><br><span class="line">cond(no)-&gt;op</span><br><span class="line">&amp;</span><br></pre></td></tr></table></figure>
+<pre><code></code></pre>
+    
+</div>
+
       
         <blockquote>
 <p><strong><em>为了直观展示编辑页面，用java代码块来编写呈现原生编辑内容</em></strong></p>

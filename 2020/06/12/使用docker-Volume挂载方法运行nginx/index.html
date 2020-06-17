@@ -16,7 +16,7 @@
 <meta property="og:description" content="Docker nginx容器启动后配置文件的修改获取有些不便，之前是通过cp方式来进行替换加载，现在使用Volume实现裙带机制修改文件内容。下面主要分为HTML、Log、Config三个文件挂载。   创建volume 123docker volume create myNginxLog    #日志信息docker volume create myNginxConfig #配置信息docke">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-06-12T07:04:43.000Z">
-<meta property="article:modified_time" content="2020-06-12T07:07:41.217Z">
+<meta property="article:modified_time" content="2020-06-17T06:49:55.534Z">
 <meta property="article:author" content="Guangxing">
 <meta name="twitter:card" content="summary">
   
@@ -53,7 +53,7 @@
 		  <h1 class="header-author"><a href="/">Guangxing</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">减肥中……</p>
+		<p class="header-subtitle">丈夫志四海，万里犹比邻</p>
 		
 
 		<nav class="header-menu">
@@ -119,7 +119,7 @@
 			  <h1 class="header-author js-header-author">Guangxing</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>减肥中……<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>丈夫志四海，万里犹比邻<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -193,6 +193,48 @@
       </header>
     
     <div class="article-entry" itemprop="articleBody">
+	<div class="article-entry" itemprop="articleBody">
+    
+        
+        <blockquote>
+<p>Docker nginx容器启动后配置文件的修改获取有些不便，之前是通过cp方式来进行替换加载，现在使用Volume实现裙带机制修改文件内容。下面主要分为HTML、Log、Config三个文件挂载。</p>
+</blockquote>
+<ol>
+<li><p>创建volume</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker volume create myNginxLog    #日志信息</span><br><span class="line">docker volume create myNginxConfig #配置信息</span><br><span class="line">docker volume create myNginxHtml	 #网站信息</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建容器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -it -p 8088:80 --name=mynginx -v myNginxHtml:/usr/share/nginx/html -v myNginxConfig:/etc/nginx -v myNginxLog:/var/log/nginx  nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看各volume在宿主机存在位置</p>
+<p><em>以myNginxConfig为例：</em></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker volume inspect myNginxConfig</span><br></pre></td></tr></table></figure>
+
+<p>我测试输出为：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">       <span class="attr">"Driver"</span>: <span class="string">"local"</span>,</span><br><span class="line">       <span class="attr">"Labels"</span>: &#123;&#125;,</span><br><span class="line">       <span class="attr">"Mountpoint"</span>: <span class="string">"/var/lib/docker/volumes/myNginxConfig/_data"</span>,</span><br><span class="line">       <span class="attr">"Name"</span>: <span class="string">"myNginxConfig"</span>,</span><br><span class="line">       <span class="attr">"Options"</span>: &#123;&#125;,</span><br><span class="line">       <span class="attr">"Scope"</span>: <span class="string">"local"</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在/var/lib/docker/volumes/myNginxConfig/_data 文件下就可以找到相关文件夹</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">[root]#</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/var/lib/docker/volumes/myNginxConfig/_data</span><br><span class="line"><span class="meta">[root]#</span><span class="bash"> ls</span></span><br><span class="line">conf.d          koi-utf  mime.types  nginx.conf   uwsgi_params</span><br><span class="line">fastcgi_params  koi-win  modules     scgi_params  win-utf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改default.conf</p>
+<ul>
+<li>进入/var/lib/docker/volumes/myNginxConfig/_data/conf.d</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">[root]#</span><span class="bash"> <span class="built_in">cd</span> /var/lib/docker/volumes/myNginxConfig/_data/conf.d</span></span><br><span class="line"><span class="meta">[root]#</span><span class="bash"> ls</span></span><br><span class="line">default.conf</span><br><span class="line"><span class="meta">[root]#</span><span class="bash"> vim default.conf</span></span><br><span class="line"><span class="meta">#</span><span class="bash">按照个人实际项目情况修改配置文件，并且保存退出。</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看容器中default.conf配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it 容器id bash</span><br><span class="line">cd &#x2F;etc&#x2F;nginx&#x2F;conf.d</span><br><span class="line">cat default.conf</span><br><span class="line">#此时发现通过宿主机修改的配置文件成功同步到容器中</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>容器重新加载配置文件（支持热部署，不用重启容器奥）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -i [nginx容器名/id] nginx -s reload</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>OK 大功告成！</p>
+</li>
+</ol>
+
+    
+</div>
+
       
         <blockquote>
 <p>Docker nginx容器启动后配置文件的修改获取有些不便，之前是通过cp方式来进行替换加载，现在使用Volume实现裙带机制修改文件内容。下面主要分为HTML、Log、Config三个文件挂载。</p>
@@ -268,11 +310,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="/categories/docker/volume//" class="article-tag-list-link color2">volume</a>
+        			<a href="/categories/docker/Volume//" class="article-tag-list-link color2">Volume</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="/categories/docker/volume/nginx//" class="article-tag-list-link color1">nginx</a>
+        			<a href="/categories/nginx//" class="article-tag-list-link color1">nginx</a>
         		</li>
       		
 		</ul>
