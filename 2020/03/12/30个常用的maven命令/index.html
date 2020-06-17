@@ -16,14 +16,14 @@
 <meta property="og:description" content="maven 命令的格式为 mvn [plugin-name]:[goal-name]，可以接受的参数如下。 123456-D 指定参数，如 -Dmaven.test.skip&#x3D;true 跳过单元测试；-P 指定 Profile 配置，可以用于区分环境；-e 显示maven运行出错的信息；-o 离线执行命令,即不去远程仓库更新包；-X 显示maven允许的debug信息；-U 强制去远程更新snap">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-03-12T06:57:27.000Z">
-<meta property="article:modified_time" content="2020-06-12T07:02:22.729Z">
+<meta property="article:modified_time" content="2020-06-17T11:55:37.455Z">
 <meta property="article:author" content="Guangxing">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="爱踢球的胖子" type="application/atom+xml">
   
   
-    <link rel="icon" href="/img/qiaoba.png">
+    <link rel="icon" href="/img/favicon.png">
   
   <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
   <style type="text/css">
@@ -193,11 +193,12 @@
       </header>
     
     <div class="article-entry" itemprop="articleBody">
-	<div class="article-entry" itemprop="articleBody">
-    
-        
-        <p><strong>maven 命令的格式为 mvn [plugin-name]:[goal-name]，可以接受的参数如下。</strong></p>
+       
+              
+              <p><strong>maven 命令的格式为 mvn [plugin-name]:[goal-name]，可以接受的参数如下。</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-D 指定参数，如 -Dmaven.test.skip=<span class="keyword">true</span> 跳过单元测试；</span><br><span class="line">-P 指定 Profile 配置，可以用于区分环境；</span><br><span class="line">-e 显示maven运行出错的信息；</span><br><span class="line">-o 离线执行命令,即不去远程仓库更新包；</span><br><span class="line">-X 显示maven允许的debug信息；</span><br><span class="line">-U 强制去远程更新snapshot的插件或依赖，默认每天只更新一次。</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
 
 <p><strong><em>常用命令</em></strong></p>
 <ol>
@@ -261,76 +262,7 @@
 <li>部署展开的war文件：mvn war:exploded tomcat:exploded </li>
 </ol>
 
-    
-</div>
-
-      
-        <p><strong>maven 命令的格式为 mvn [plugin-name]:[goal-name]，可以接受的参数如下。</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-D 指定参数，如 -Dmaven.test.skip=<span class="keyword">true</span> 跳过单元测试；</span><br><span class="line">-P 指定 Profile 配置，可以用于区分环境；</span><br><span class="line">-e 显示maven运行出错的信息；</span><br><span class="line">-o 离线执行命令,即不去远程仓库更新包；</span><br><span class="line">-X 显示maven允许的debug信息；</span><br><span class="line">-U 强制去远程更新snapshot的插件或依赖，默认每天只更新一次。</span><br></pre></td></tr></table></figure>
-
-<p><strong><em>常用命令</em></strong></p>
-<ol>
-<li><p>创建maven项目：mvn archetype:create </p>
-<p>指定 group： -DgroupId=packageName </p>
-<p>指定 artifact：-DartifactId=projectName</p>
-<p>创建web项目：-DarchetypeArtifactId=maven-archetype-webapp  </p>
-</li>
-<li><p>创建maven项目：mvn archetype:generate</p>
-</li>
-<li><p>验证项目是否正确：mvn validate</p>
-</li>
-<li><p>maven 打包：mvn package</p>
-</li>
-<li><p>只打jar包：mvn jar:jar</p>
-</li>
-<li><p>生成源码jar包：mvn source:jar</p>
-</li>
-<li><p>产生应用需要的任何额外的源代码：mvn generate-sources</p>
-</li>
-<li><p>编译源代码： mvn compile</p>
-</li>
-<li><p>编译测试代码：mvn test-compile</p>
-</li>
-<li><p>运行测试：mvn test</p>
-</li>
-<li><p>运行检查：mvn verify</p>
-</li>
-<li><p>清理maven项目：mvn clean</p>
-</li>
-<li><p>生成eclipse项目：mvn eclipse:eclipse</p>
-</li>
-<li><p>清理eclipse配置：mvn eclipse:clean</p>
-</li>
-<li><p>生成idea项目：mvn idea:idea</p>
-</li>
-<li><p>安装项目到本地仓库：mvn install</p>
-</li>
-<li><p>发布项目到远程仓库：mvn:deploy</p>
-</li>
-<li><p>在集成测试可以运行的环境中处理和发布包：mvn integration-test</p>
-</li>
-<li><p>显示maven依赖树：mvn dependency:tree</p>
-</li>
-<li><p>显示maven依赖列表：mvn dependency:list</p>
-</li>
-<li><p>下载依赖包的源码：mvn dependency:sources</p>
-</li>
-<li><p>安装本地jar到本地仓库：mvn install:install-file -DgroupId=packageName -DartifactId=projectName -Dversion=version -Dpackaging=jar -Dfile=path</p>
-</li>
-</ol>
-<p><strong><em>web相关命令</em></strong></p>
-<ol>
-<li>启动tomcat：mvn tomcat:run</li>
-<li>启动jetty：mvn jetty:run</li>
-<li>运行打包部署：mvn tomcat:deploy</li>
-<li>撤销部署：mvn tomcat:undeploy</li>
-<li>启动web应用：mvn tomcat:start</li>
-<li>停止web应用：mvn tomcat:stop</li>
-<li>重新部署：mvn tomcat:redeploy</li>
-<li>部署展开的war文件：mvn war:exploded tomcat:exploded </li>
-</ol>
-
-      
+          
 
       
         <div class="page-reward">
@@ -364,11 +296,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/maven//" class="article-tag-list-link color1">maven</a>
+        			<a href="/categories/Maven//" class="article-tag-list-link color1">Maven</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="/categories/maven/java//" class="article-tag-list-link color5">java</a>
+        			<a href="/categories/Maven/Java//" class="article-tag-list-link color5">Java</a>
         		</li>
       		
 		</ul>
@@ -491,6 +423,16 @@
   
 
   
+  <div id="SOHUCS" sid="30个常用的maven命令" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "cyuTnXVra",
+        conf: "prod_5f6f5511a3f96475bc72c281d2296d82"
+    });
+</script>
+</script>
+  
 
   
 
@@ -589,6 +531,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
