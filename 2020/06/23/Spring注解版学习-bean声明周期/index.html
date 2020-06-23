@@ -6,16 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://guangxingblog.com">
-  <title>文章分类 | 爱踢球的胖子</title>
+  <title>Spring注解版学习-bean声明周期 | 爱踢球的胖子</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="文章分类">
-<meta property="og:url" content="http://guangxingblog.com/categories/index.html">
+  <meta name="description" content="注：该文章是根据尚硅谷雷丰阳老师有关授课整理  bean的生命周期： ​    bean创建—初始化—-销毁的过程  容器管理bean的生命周期；  我们可以自定义初始化和销毁方法；容器在bean进行到当前生命周期的时候来调用我们自定义的初始化和销毁方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring注解版学习-bean声明周期">
+<meta property="og:url" content="http://guangxingblog.com/2020/06/23/Spring%E6%B3%A8%E8%A7%A3%E7%89%88%E5%AD%A6%E4%B9%A0-bean%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F/index.html">
 <meta property="og:site_name" content="爱踢球的胖子">
+<meta property="og:description" content="注：该文章是根据尚硅谷雷丰阳老师有关授课整理  bean的生命周期： ​    bean创建—初始化—-销毁的过程  容器管理bean的生命周期；  我们可以自定义初始化和销毁方法；容器在bean进行到当前生命周期的时候来调用我们自定义的初始化和销毁方法">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-06-12T05:53:28.000Z">
-<meta property="article:modified_time" content="2020-06-16T15:14:26.527Z">
+<meta property="article:published_time" content="2020-06-23T12:23:17.000Z">
+<meta property="article:modified_time" content="2020-06-23T12:29:02.483Z">
 <meta property="article:author" content="Guangxing">
+<meta property="article:tag" content="Spring">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="爱踢球的胖子" type="application/atom+xml">
@@ -172,20 +175,242 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article class="article article-type-post show">
-  <header class="article-header" style="border-bottom: 1px solid #ccc">
-  <h1 class="article-title" itemprop="name">
-    文章分类
-  </h1>
-  </header>
+            <article id="post-Spring注解版学习-bean声明周期" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Spring注解版学习-bean声明周期
+    </h1>
+  
+
+        
+        <a href="/2020/06/23/Spring%E6%B3%A8%E8%A7%A3%E7%89%88%E5%AD%A6%E4%B9%A0-bean%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F/" class="archive-article-date">
+  	<time datetime="2020-06-23T12:23:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-23</time>
+</a>
+<!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">480字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">1分</span>
+      </span>
+    </span>
+</div>
+          
+          <!-- 添加完成 -->
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+              
+              <p><strong><em>注：该文章是根据尚硅谷雷丰阳老师有关授课整理</em></strong></p>
+<ul>
+<li><p>bean的生命周期：</p>
+<p>​    bean创建—初始化—-销毁的过程</p>
+</li>
+<li><p>容器管理bean的生命周期；</p>
+</li>
+<li><p>我们可以自定义初始化和销毁方法；容器在bean进行到当前生命周期的时候来调用我们自定义的初始化和销毁方法</p>
+</li>
+</ul>
+<a id="more"></a>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 构造（对象创建）</span></span><br><span class="line"><span class="comment"> * 		单实例：在容器启动的时候创建对象</span></span><br><span class="line"><span class="comment"> * 		多实例：在每次获取的时候创建对象\</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * BeanPostProcessor.postProcessBeforeInitialization</span></span><br><span class="line"><span class="comment"> * 初始化：</span></span><br><span class="line"><span class="comment"> * 		对象创建完成，并赋值好，调用初始化方法。。。</span></span><br><span class="line"><span class="comment"> * BeanPostProcessor.postProcessAfterInitialization</span></span><br><span class="line"><span class="comment"> * 销毁：</span></span><br><span class="line"><span class="comment"> * 		单实例：容器关闭的时候</span></span><br><span class="line"><span class="comment"> * 		多实例：容器不会管理这个bean；容器不会调用销毁方法；</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * 遍历得到容器中所有的BeanPostProcessor；挨个执行beforeInitialization，</span></span><br><span class="line"><span class="comment"> * 一但返回null，跳出for循环，不会执行后面的BeanPostProcessor.postProcessorsBeforeInitialization</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * BeanPostProcessor原理</span></span><br><span class="line"><span class="comment"> * populateBean(beanName, mbd, instanceWrapper);给bean进行属性赋值</span></span><br><span class="line"><span class="comment"> * initializeBean</span></span><br><span class="line"><span class="comment"> * &#123;</span></span><br><span class="line"><span class="comment"> * applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);</span></span><br><span class="line"><span class="comment"> * invokeInitMethods(beanName, wrappedBean, mbd);执行自定义初始化</span></span><br><span class="line"><span class="comment"> * applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);</span></span><br><span class="line"><span class="comment"> *&#125;</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * 1）、指定初始化和销毁方法；</span></span><br><span class="line"><span class="comment"> * 		通过<span class="doctag">@Bean</span>指定init-method和destroy-method；</span></span><br><span class="line"><span class="comment"> * 2）、通过让Bean实现InitializingBean（定义初始化逻辑），</span></span><br><span class="line"><span class="comment"> * 				DisposableBean（定义销毁逻辑）;</span></span><br><span class="line"><span class="comment"> * 3）、可以使用JSR250；</span></span><br><span class="line"><span class="comment"> * 		<span class="doctag">@PostConstruct</span>：在bean创建完成并且属性赋值完成；来执行初始化方法</span></span><br><span class="line"><span class="comment"> * 		<span class="doctag">@PreDestroy</span>：在容器销毁bean之前通知我们进行清理工作</span></span><br><span class="line"><span class="comment"> * 4）、BeanPostProcessor【interface】：bean的后置处理器；</span></span><br><span class="line"><span class="comment"> * 		在bean初始化前后进行一些处理工作；</span></span><br><span class="line"><span class="comment"> * 		postProcessBeforeInitialization:在初始化之前工作</span></span><br><span class="line"><span class="comment"> * 		postProcessAfterInitialization:在初始化之后工作</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * Spring底层对 BeanPostProcessor 的使用；</span></span><br><span class="line"><span class="comment"> * 		bean赋值，注入其他组件，<span class="doctag">@Autowired</span>，生命周期注解功能，<span class="doctag">@Async</span>,xxx BeanPostProcessor;</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(<span class="string">"com.atguigu.bean"</span>)</span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainConfigOfLifeCycle</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//@Scope("prototype")</span></span><br><span class="line">	<span class="meta">@Bean</span>(initMethod=<span class="string">"init"</span>,destroyMethod=<span class="string">"detory"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Car <span class="title">car</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Car();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Car</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"car constructor..."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"car ... init..."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">detory</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"car ... detory..."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Spring技术栈//" class="article-tag-list-link color5">Spring技术栈</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Spring技术栈/Spring注解驱动//" class="article-tag-list-link color1">Spring注解驱动</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://guangxingblog.com/2020/06/23/Spring%E6%B3%A8%E8%A7%A3%E7%89%88%E5%AD%A6%E4%B9%A0-bean%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
 
   
-  <div class="category-all-page">
-    <h2>共计&nbsp;8&nbsp;个分类</h2>
-    <ul class="category-list-item-list"><li class="category-list-item-list-item"><a class="category-list-item-list-link" href="/categories/Docker%E6%8A%80%E6%9C%AF%E6%A0%88/">Docker技术栈</a><span class="category-list-item-list-count">1</span></li><li class="category-list-item-list-item"><a class="category-list-item-list-link" href="/categories/Maven%E6%8A%80%E6%9C%AF%E6%A0%88/">Maven技术栈</a><span class="category-list-item-list-count">1</span></li><li class="category-list-item-list-item"><a class="category-list-item-list-link" href="/categories/Nginx%E6%8A%80%E6%9C%AF%E6%A0%88/">Nginx技术栈</a><span class="category-list-item-list-count">1</span></li><li class="category-list-item-list-item"><a class="category-list-item-list-link" href="/categories/Spring%E6%8A%80%E6%9C%AF%E6%A0%88/">Spring技术栈</a><span class="category-list-item-list-count">6</span><ul class="category-list-item-list-child"><li class="category-list-item-list-item"><a class="category-list-item-list-link" href="/categories/Spring%E6%8A%80%E6%9C%AF%E6%A0%88/SpringBoot%E6%8A%80%E6%9C%AF%E6%A0%88/">SpringBoot技术栈</a><span class="category-list-item-list-count">1</span></li><li class="category-list-item-list-item"><a class="category-list-item-list-link" href="/categories/Spring%E6%8A%80%E6%9C%AF%E6%A0%88/Spring%E6%B3%A8%E8%A7%A3%E9%A9%B1%E5%8A%A8/">Spring注解驱动</a><span class="category-list-item-list-count">4</span></li></ul></li><li class="category-list-item-list-item"><a class="category-list-item-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a><span class="category-list-item-list-count">1</span></li><li class="category-list-item-list-item"><a class="category-list-item-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a><span class="category-list-item-list-count">1</span></li></ul>
-  </div>
+<nav id="article-nav">
   
-</article>
+  
+    <a href="/2020/06/23/Nginx%E5%91%BD%E4%BB%A4-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1-%E9%AB%98%E5%8F%AF%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Nginx命令+反向代理+负载均衡+高可用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
+  
+
+  
+  <div id="SOHUCS" sid="Spring注解版学习-bean声明周期" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "cyuTnXVra",
+        conf: "prod_5f6f5511a3f96475bc72c281d2296d82"
+    });
+</script>
+</script>
+  
+
+  
+
+  
+
           </div>
         </div>
       </div>
@@ -210,7 +435,7 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
