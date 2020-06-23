@@ -332,99 +332,16 @@
     
     <div class="article-entry" itemprop="articleBody">
        
-              
               <h3 id="Nginx常用命令"><a href="#Nginx常用命令" class="headerlink" title="Nginx常用命令"></a>Nginx常用命令</h3><ol>
 <li>在没有配置环境变量情况下，使用Nginx操作命令前提条件：必须进入到nginx的目录<br>默认：/usr/local/nginx/sbin</li>
 <li>查看nginx的版本号</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;nginx -v</span><br></pre></td></tr></table></figure>
 
-<ol>
+<ol start="3">
 <li>启动nginx</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;nginx</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>关闭nginx</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;nginx -s stop</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>重新加载nginx</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;nginx -s reload</span><br></pre></td></tr></table></figure>
-
-<h3 id="Nginx配置文件"><a href="#Nginx配置文件" class="headerlink" title="Nginx配置文件"></a>Nginx配置文件</h3><ol>
-<li>nginx配置文件位置</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;nginx.conf</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>nginx配置文件组成</li>
-</ol>
-<p>(1) nginx配置文件由三部分组成</p>
-<ul>
-<li>全局块<br>从配置文件开始到events之间的内容，主要是设置一些会影响nginx服务器整体运行的配置指令。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">user  nginx;</span><br><span class="line">#支持并发数量配置（一半和cpu处理核心数一致）</span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line">error_log  &#x2F;var&#x2F;log&#x2F;nginx&#x2F;error.log warn;</span><br><span class="line">pid        &#x2F;var&#x2F;run&#x2F;nginx.pid;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Events块<br>影响nginx服务器与用户网络连接情况。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">events &#123;</span><br><span class="line">    #配置最大的连接数</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>http块<br>nginx服务器配置最频繁的地方，其中他还包括http全局块，以及/etc/nginx/conf.d/*.conf</li>
-</ul>
-<h3 id="Nginx反向代理实例"><a href="#Nginx反向代理实例" class="headerlink" title="Nginx反向代理实例"></a>Nginx反向代理实例</h3><blockquote>
-<p>请求本地127.0.0.1:9001,通过nginx代理转发到本地8001端口</p>
-</blockquote>
-<ul>
-<li>配置文件</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">  listen 9001;</span><br><span class="line">  server_name 127.0.0.1;</span><br><span class="line">  location &#x2F; &#123;</span><br><span class="line">    root html;</span><br><span class="line">    proxy_pass http:127.0.0.1:8001;</span><br><span class="line">    index index.html index.htm</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>使用nginx反向代理，根据访问的路径跳转到不同端口的服务中，nginx监听端口味9001</p>
-<p>访问 127.0.0.1:9001/edu/ 直接跳转到127.0.0.1:8081</p>
-<p>访问 127.0.0.1:9001/vod/ 直接跳转到127.0.0.1:8082</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#新增</span><br><span class="line">server&#123;</span><br><span class="line">    listen 9001;</span><br><span class="line">  location ~ &#x2F;edu&#x2F; &#123;</span><br><span class="line">    proxy_pass http:&#x2F;&#x2F;localhost:8081;</span><br><span class="line">  &#125;</span><br><span class="line">  location ~ &#x2F;vod&#x2F; &#123;</span><br><span class="line">    proxy_pass http:&#x2F;&#x2F;localhost:8082;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 补充location书写格式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location [&#x3D;,~,~*,^~] uri&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>说明： </p>
-<ul>
-<li>=：用于不含正则表达式的uri前,要求请求字符串与uri严格匹配，如果匹配成功，就停止继续向下搜索并立即处理该请求。</li>
-<li>~：用于表示uri包含正则表达式，并且区分大小写。</li>
-<li>~*:用于表示uri包含正则表达式，并且不区分大小写。</li>
-<li>^~:用于不含正则表达式的uri前，要求Nginx服务器找到标识uri和请求字符串匹配度最高的location后，立即使用此location处理请求，而不再使用location块中的正则uri和请求字符串做匹配。</li>
-</ul>
-<h3 id="Nginx负载均衡"><a href="#Nginx负载均衡" class="headerlink" title="Nginx负载均衡"></a><strong>Nginx负载均衡</strong></h3><p><strong><em>配置文件</em></strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">http&#123;</span><br><span class="line">    </span><br><span class="line">  upstream myserver&#123;</span><br><span class="line">    #ip_hash;</span><br><span class="line">    server 192.168.XXX.XXX:8081 weight&#x3D;1;</span><br><span class="line">    server 192.168.XXX.XXX:8082 weight&#x3D;1;</span><br><span class="line">    #fair</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  server&#123;</span><br><span class="line">    location &#x2F; &#123;</span><br><span class="line">            proxy_pass http:&#x2F;&#x2F;myserver;#myserver 必须同上方upstream 后面名称一致</span><br><span class="line">      proxy_connect_timeout 10;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>资源分配方式：</p>
-<ul>
-<li>轮询（默认）</li>
-</ul>
-<p>每个请求按时间逐一分配到不同的后端服务器，如果后端服务器宕机，就能自动剔除；</p>
-<ul>
-<li>wight</li>
-</ul>
-<p>按照权重分配，权重值越高则陪分配的客户端越多。</p>
-<ul>
-<li>ip_hash</li>
-</ul>
-<p>每个请求访问ip的hash结果分配，这样每个访客固定访问一个后缀服务器，可以解决session问题</p>
-<ul>
-<li><p>fair(第三方)</p>
-<p>按照后端服务器的响应时间来分配请求，响应时间短的优先分配。</p>
-</li>
-</ul>
-<h3 id="Nginx高可用配置"><a href="#Nginx高可用配置" class="headerlink" title="Nginx高可用配置"></a>Nginx高可用配置</h3><p>使用工具keepalived</p>
-<p>具体操作流程：<a href="https://blog.csdn.net/l1028386804/article/details/72801492">Nginx+Keepalived实现高可用</a> </p>
-
           
 
       
