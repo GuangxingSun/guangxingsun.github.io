@@ -172,6 +172,122 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-spring-security中-PreAuthorize、-PostAuthorize、-PreFilter和-PostFilter四者的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/08/spring-security%E4%B8%AD-PreAuthorize%E3%80%81-PostAuthorize%E3%80%81-PreFilter%E5%92%8C-PostFilter%E5%9B%9B%E8%80%85%E7%9A%84%E5%8C%BA%E5%88%AB/">Spring Security中@PreAuthorize、@PostAuthorize、@PreFilter和@PostFilter四者的区别</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/08/spring-security%E4%B8%AD-PreAuthorize%E3%80%81-PostAuthorize%E3%80%81-PreFilter%E5%92%8C-PostFilter%E5%9B%9B%E8%80%85%E7%9A%84%E5%8C%BA%E5%88%AB/" class="archive-article-date">
+  	<time datetime="2020-07-08T02:03:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-08</time>
+</a>
+<!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">813字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">3分</span>
+      </span>
+    </span>
+</div>
+          
+          <!-- 添加完成 -->
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+              <h4 id="spring-security中可以通过表达式控制方法权限："><a href="#spring-security中可以通过表达式控制方法权限：" class="headerlink" title="spring security中可以通过表达式控制方法权限："></a>spring security中可以通过表达式控制方法权限：</h4><p>Spring Security中定义了四个支持使用表达式的注解，分别是<code>@PreAuthorize</code>、<code>@PostAuthorize</code>、<code>@PreFilter</code>和<code>@PostFilter</code>。其中前两者可以用来在方法调用前或者调用后进行权限检查，后两者可以用来对集合类型的参数或者返回值进行过滤。要使它们的定义能够对我们的方法的调用产生影响我们需要设置global-method-security元素的pre-post-annotations=”enabled”，默认为disabled。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">security:global-method-security</span> <span class="attr">pre-post-annotations</span>=<span class="string">"disabled"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="使用-PreAuthorize和-PostAuthorize进行访问控制"><a href="#使用-PreAuthorize和-PostAuthorize进行访问控制" class="headerlink" title="使用@PreAuthorize和@PostAuthorize进行访问控制"></a>使用@PreAuthorize和@PostAuthorize进行访问控制</h5>
+          
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Spring Security</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Spring技术栈//" class="article-tag-list-link color5">Spring技术栈</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Spring技术栈/Spring-Security技术栈//" class="article-tag-list-link color4">Spring Security技术栈</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/08/spring-security%E4%B8%AD-PreAuthorize%E3%80%81-PostAuthorize%E3%80%81-PreFilter%E5%92%8C-PostFilter%E5%9B%9B%E8%80%85%E7%9A%84%E5%8C%BA%E5%88%AB/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
     <article id="post-IntelliJ-IDEA快捷键整理（全）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1216,112 +1332,6 @@
 
 
   
-    <article id="post-Filter、Interceptor、Aop实现与区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/16/Filter%E3%80%81Interceptor%E3%80%81Aop%E5%AE%9E%E7%8E%B0%E4%B8%8E%E5%8C%BA%E5%88%AB/">Filter、Interceptor、Aop实现与区别</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/16/Filter%E3%80%81Interceptor%E3%80%81Aop%E5%AE%9E%E7%8E%B0%E4%B8%8E%E5%8C%BA%E5%88%AB/" class="archive-article-date">
-  	<time datetime="2020-06-16T10:11:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-16</time>
-</a>
-<!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">357字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
-      </span>
-    </span>
-</div>
-          
-          <!-- 添加完成 -->
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-              <p>​        <strong>AOP</strong>: 使用的主要是<strong><em>动态代理</em></strong> ， 过滤器使用的主要是<strong><em>函数回调</em></strong>；拦截器使用是<strong><em>反射机制</em></strong> 。</p>
-<p>一个请求过来 ，先进行过滤器处理，看程序是否受理该请求 。 过滤器放过后 ， 程序中的拦截器进行处理 ，处理完后进入 被 AOP动态代理重新编译过的主要业务类进行处理 。</p>
-          
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Spring,Aop</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Spring技术栈//" class="article-tag-list-link color5">Spring技术栈</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/16/Filter%E3%80%81Interceptor%E3%80%81Aop%E5%AE%9E%E7%8E%B0%E4%B8%8E%E5%8C%BA%E5%88%AB/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1469,6 +1479,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Spring Security</a>
               </li>
              
               <li class="article-tag-list-item">
