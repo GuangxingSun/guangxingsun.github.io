@@ -172,6 +172,123 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-PropertySource和-ConfigurationProperties区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/17/PropertySource%E5%92%8C-ConfigurationProperties%E5%8C%BA%E5%88%AB/">@PropertySource和@ConfigurationProperties区别</a>
+    </h1>
+  
+
+        
+        <a href="/2020/06/17/PropertySource%E5%92%8C-ConfigurationProperties%E5%8C%BA%E5%88%AB/" class="archive-article-date">
+  	<time datetime="2020-06-17T15:07:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-17</time>
+</a>
+<!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">391字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">1分</span>
+      </span>
+    </span>
+</div>
+          
+          <!-- 添加完成 -->
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+              <h3 id="ConfigurationProperties"><a href="#ConfigurationProperties" class="headerlink" title="@ConfigurationProperties"></a>@ConfigurationProperties</h3><p><code>@ConfigurationProperties</code>是springboot中注解，用于将主配置文件(<strong>application.properties或者“application.yml”</strong> )中的属性，映射到实体类中对应的属性，同时，也可以通过指定prefix方式,进行组件初始化使用。</p>
+<p>常见使用方式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过下面两个注解把注解类注册、初始化、并注入到容器中</span></span><br><span class="line"><span class="comment">//@Component类层面注解</span></span><br><span class="line"><span class="meta">@ConfigurationProperties</span> + <span class="meta">@Component</span></span><br><span class="line"><span class="comment">//通过下面两个注解把注解类注册、初始化、并注入到容器中</span></span><br><span class="line"><span class="comment">//@Bean方法层面注解</span></span><br><span class="line"><span class="meta">@ConfigurationProperties</span> + <span class="meta">@Bean</span></span><br><span class="line"><span class="comment">//通过@EnableConfigurationProperties注解完成组件注册、初始化、并注入</span></span><br><span class="line"><span class="comment">//具体通过EnableConfigurationPropertiesImportSelector实现</span></span><br><span class="line"><span class="meta">@ConfigurationProperties</span>(prefix=<span class="string">""</span>) + [<span class="meta">@Configuration</span>，<span class="meta">@EnableConfigurationProperties</span>(ConfigurationProperties注解类<span class="class">.<span class="keyword">class</span>)】</span></span><br></pre></td></tr></table></figure>
+
+<p>​        <code>@ConfigurationProperties</code>是针对<strong>主配置文件</strong>数据来配合组件初始化。</p>
+          
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringBoot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Spring技术栈//" class="article-tag-list-link color5">Spring技术栈</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Spring技术栈/SpringBoot技术栈//" class="article-tag-list-link color4">SpringBoot技术栈</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/06/17/PropertySource%E5%92%8C-ConfigurationProperties%E5%8C%BA%E5%88%AB/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
     <article id="post-Spring注解版学习-IOC配置类" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
