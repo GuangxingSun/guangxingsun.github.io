@@ -172,6 +172,123 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Spring注解版学习-BeanPostProcessor" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/23/Spring%E6%B3%A8%E8%A7%A3%E7%89%88%E5%AD%A6%E4%B9%A0-BeanPostProcessor/">Spring注解版学习-BeanPostProcessor</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/23/Spring%E6%B3%A8%E8%A7%A3%E7%89%88%E5%AD%A6%E4%B9%A0-BeanPostProcessor/" class="archive-article-date">
+  	<time datetime="2020-07-23T08:22:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-23</time>
+</a>
+<!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">440字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">1分</span>
+      </span>
+    </span>
+</div>
+          
+          <!-- 添加完成 -->
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+              <p><strong><em>注：该文章是根据尚硅谷雷丰阳老师有关授课整理</em></strong></p>
+<blockquote>
+<p>BeanPostProcessor：bean后置处理器，bean创建对象初始化前后进行拦截工作的</p>
+</blockquote>
+<h3 id="BeanFactoryPostProcessor：beanFactory的后置处理器"><a href="#BeanFactoryPostProcessor：beanFactory的后置处理器" class="headerlink" title="BeanFactoryPostProcessor：beanFactory的后置处理器"></a>BeanFactoryPostProcessor：beanFactory的后置处理器</h3><p>在BeanFactory标准初始化之后调用，来定制和修改BeanFactory的内容；</p>
+<p>所有的bean定义已经保存加载到beanFactory，但是bean的实例还未创建</p>
+<p>BeanFactoryPostProcessor原理:</p>
+<p>1、ioc容器创建对象</p>
+<p>2、invokeBeanFactoryPostProcessors(beanFactory);</p>
+          
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Spring技术栈//" class="article-tag-list-link color5">Spring技术栈</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Spring技术栈/Spring注解驱动//" class="article-tag-list-link color1">Spring注解驱动</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/23/Spring%E6%B3%A8%E8%A7%A3%E7%89%88%E5%AD%A6%E4%B9%A0-BeanPostProcessor/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
     <article id="post-Spring注解版学习-面向切面编程-Aop" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -214,7 +331,8 @@
     
     <div class="article-entry" itemprop="articleBody">
        
-              <p>AOP是一种编程范式，与语言无关，是一种程序设计思想。<br>面向切面编程（AOP）Aspect Oriented Programming。<br>切面编程的目的是为了把通用逻辑从业务逻辑分离出来。</p>
+              <p><strong><em>注：该文章是根据尚硅谷雷丰阳老师有关授课整理</em></strong></p>
+<p>AOP是一种编程范式，与语言无关，是一种程序设计思想。<br>面向切面编程（AOP）Aspect Oriented Programming。<br>切面编程的目的是为了把通用逻辑从业务逻辑分离出来。</p>
 <p>先来看看切面的常用术语：<br>Join point: 拦截点，如某个业务方法。<br>Pointcut: Joinpoint 的表达式，表示拦截哪些方法。一个 Pointcut 对应多个 Joinpoint。<br>Advice: 要切入的逻辑。</p>
 <ul>
 <li>BeforeAdvice 在方法前切入。</li>
@@ -1193,124 +1311,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/06/20/Spring%E6%B3%A8%E8%A7%A3%E7%89%88%E5%AD%A6%E4%B9%A0-%E7%BB%84%E4%BB%B6%E6%B3%A8%E5%86%8C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-Java传参调用Matlab编译导出的jar文件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/18/Java%E4%BC%A0%E5%8F%82%E8%B0%83%E7%94%A8Matlab%E7%BC%96%E8%AF%91%E5%AF%BC%E5%87%BA%E7%9A%84jar%E6%96%87%E4%BB%B6/">Java传参调用Matlab编译导出的jar文件</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/18/Java%E4%BC%A0%E5%8F%82%E8%B0%83%E7%94%A8Matlab%E7%BC%96%E8%AF%91%E5%AF%BC%E5%87%BA%E7%9A%84jar%E6%96%87%E4%BB%B6/" class="archive-article-date">
-  	<time datetime="2020-06-18T09:33:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-18</time>
-</a>
-<!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">761字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">3分</span>
-      </span>
-    </span>
-</div>
-          
-          <!-- 添加完成 -->
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-       
-              <p>最近项目有个简单的数据分析需求，求散点数的趋势线斜率，但是java没有现成的类库，于是乎就想到Matlab,一查果然可以轻松实现，下面就把事先过程逐一记录。</p>
-<p><strong>运行环境：</strong></p>
-<ul>
-<li>Jdk1.7 64-Bit</li>
-<li>Matlab R2016b</li>
-</ul>
-<p><strong>注意：</strong></p>
-<ul>
-<li>安装Matlab版本支持Jdk版本以及安装位数必须一致，在命令行窗口输入：version -java 回车。</li>
-</ul>
-          
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Matlab</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据分析//" class="article-tag-list-link color5">数据分析</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/18/Java%E4%BC%A0%E5%8F%82%E8%B0%83%E7%94%A8Matlab%E7%BC%96%E8%AF%91%E5%AF%BC%E5%87%BA%E7%9A%84jar%E6%96%87%E4%BB%B6/">展开全文 >></a>
         </p>
       
 
