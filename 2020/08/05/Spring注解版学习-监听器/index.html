@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://guangxingblog.com">
-  <title>Archives: 2020/3 | 爱踢球的胖子</title>
+  <title>Spring注解版学习-监听器 | 爱踢球的胖子</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="爱踢球的胖子">
-<meta property="og:url" content="http://guangxingblog.com/archives/2020/03/index.html">
+  <meta name="description" content="注：该文章是根据尚硅谷雷丰阳老师有关授课整理 ApplicationListener：监听容器中发布的事件。事件驱动模型开发； public interface ApplicationListener  监听 ApplicationEvent 及其下面的子事件； 步骤： 1）、写一个监听器（ApplicationListener实现类）来监听某个事件（ApplicationEvent及其子类） ​">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring注解版学习-监听器">
+<meta property="og:url" content="http://guangxingblog.com/2020/08/05/Spring%E6%B3%A8%E8%A7%A3%E7%89%88%E5%AD%A6%E4%B9%A0-%E7%9B%91%E5%90%AC%E5%99%A8/index.html">
 <meta property="og:site_name" content="爱踢球的胖子">
+<meta property="og:description" content="注：该文章是根据尚硅谷雷丰阳老师有关授课整理 ApplicationListener：监听容器中发布的事件。事件驱动模型开发； public interface ApplicationListener  监听 ApplicationEvent 及其下面的子事件； 步骤： 1）、写一个监听器（ApplicationListener实现类）来监听某个事件（ApplicationEvent及其子类） ​">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-05T01:39:14.000Z">
+<meta property="article:modified_time" content="2020-08-05T03:13:38.452Z">
 <meta property="article:author" content="Guangxing">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="ApplicationListener">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="爱踢球的胖子" type="application/atom+xml">
@@ -170,76 +176,302 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Spring注解版学习-监听器" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/12/30%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%9A%84maven%E5%91%BD%E4%BB%A4/" class="archive-article-date">
-  	<time datetime="2020-03-12T06:57:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-12</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/12/30%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%9A%84maven%E5%91%BD%E4%BB%A4/">30个常用的maven命令</a>
+    <h1 class="article-title" itemprop="name">
+      Spring注解版学习-监听器
     </h1>
   
 
-        <div class="article-info info-on-right">
+        
+        <a href="/2020/08/05/Spring%E6%B3%A8%E8%A7%A3%E7%89%88%E5%AD%A6%E4%B9%A0-%E7%9B%91%E5%90%AC%E5%99%A8/" class="archive-article-date">
+  	<time datetime="2020-08-05T01:39:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
+</a>
+<!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">694字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">3分</span>
+      </span>
+    </span>
+</div>
           
+          <!-- 添加完成 -->
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+       
+              
+              <p><strong><em>注：该文章是根据尚硅谷雷丰阳老师有关授课整理</em></strong></p>
+<p><code>ApplicationListener</code>：监听容器中发布的事件。事件驱动模型开发；</p>
+<p>public interface ApplicationListener<E extends applicationevent></E></p>
+<ul>
+<li><p>监听 ApplicationEvent 及其下面的子事件；</p>
+<p>步骤：</p>
+<p>1）、写一个监听器（ApplicationListener实现类）来监听某个事件（ApplicationEvent及其子类）</p>
+<p>​    @EventListener;</p>
+<p>​    原理：使用EventListenerMethodProcessor处理器来解析方法上的@EventListener；</p>
+<p>2）、把监听器加入到容器；</p>
+<a id="more"></a>
+
+<p>3）、只要容器中有相关事件的发布，我们就能监听到这个事件；</p>
+<p>​    ContextRefreshedEvent：容器刷新完成（所有bean都完全创建）会发布这个事件；</p>
+<p>​    ContextClosedEvent：关闭容器会发布这个事件；</p>
+<p>4）、发布一个事件：</p>
+<p>​    applicationContext.publishEvent()；</p>
+</li>
+</ul>
+<ul>
+<li><p>原理：</p>
+<p>ContextRefreshedEvent、IOCTest_Ext$1[source=我发布的时间]、ContextClosedEvent；</p>
+<p>1）、ContextRefreshedEvent事件：</p>
+<p>​    1）、容器创建对象：refresh()；</p>
+<p>​    2）、finishRefresh();容器刷新完成会发布ContextRefreshedEvent事件</p>
+<p>2）、自己发布事件；</p>
+<p>3）、容器关闭会发布ContextClosedEvent；</p>
+</li>
+</ul>
+<ul>
+<li><p>【事件发布流程】：</p>
+<p>publishEvent(new ContextRefreshedEvent(this));</p>
+<p>​    1）、获取事件的多播器（派发器）：getApplicationEventMulticaster()</p>
+<p>​    2）、multicastEvent派发事件：</p>
+<p>​    3）、获取到所有的ApplicationListener；</p>
+<p>​    for (final ApplicationListener&lt;?&gt; listener : getApplicationListeners(event, type)) {</p>
+<p>​        1）、如果有Executor，可以支持使用Executor进行异步派发；</p>
+<p>​        Executor executor = getTaskExecutor();</p>
+<p>​        2）、否则，同步的方式直接执行listener方法；invokeListener(listener, event);</p>
+<p>​        拿到listener回调onApplicationEvent方法；</p>
+</li>
+</ul>
+<ul>
+<li><p>【事件多播器（派发器）初始化过程】</p>
+<p>1）、容器创建对象：refresh();</p>
+<p>2）、initApplicationEventMulticaster();初始化ApplicationEventMulticaster；</p>
+<p>​    1）、先去容器中找有没有id=“applicationEventMulticaster”的组件；</p>
+<p>​    2）、如果没有this.applicationEventMulticaster = new SimpleApplicationEventMulticaster(beanFactory);</p>
+<p>​    并且加入到容器中，我们就可以在其他组件要派发事件，自动注入这个applicationEventMulticaster；</p>
+</li>
+<li><p>【容器中有哪些监听器】</p>
+<p>1）、容器创建对象：refresh();</p>
+<p>2）、registerListeners();</p>
+<p>​    从容器中拿到所有的监听器，把他们注册到applicationEventMulticaster中；</p>
+<p>​    String[] listenerBeanNames = getBeanNamesForType(ApplicationListener.class, true, false);</p>
+<p>​    //将listener注册到ApplicationEventMulticaster中</p>
+<p>​    getApplicationEventMulticaster().addApplicationListenerBean(listenerBeanName);</p>
+</li>
+</ul>
+<ul>
+<li><p>SmartInitializingSingleton 原理：-&gt;afterSingletonsInstantiated();</p>
+<p>1）、ioc容器创建对象并refresh()；</p>
+<p>2）、finishBeanFactoryInitialization(beanFactory);初始化剩下的单实例bean；</p>
+<p>​    1）、先创建所有的单实例bean；getBean();</p>
+<p>​    2）、获取所有创建好的单实例bean，判断是否是SmartInitializingSingleton类型的；</p>
+<p>如果是就调用afterSingletonsInstantiated();</p>
+</li>
+</ul>
+<p>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//------------------------------------------------------------------------</span></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.ApplicationEvent;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.ApplicationListener;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyApplicationListener</span> <span class="keyword">implements</span> <span class="title">ApplicationListener</span>&lt;<span class="title">ApplicationEvent</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//当容器中发布此事件以后，方法触发</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onApplicationEvent</span><span class="params">(ApplicationEvent event)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">"收到事件："</span>+event);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//-------------------------------------------------------------------</span></span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.ApplicationEvent;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.AnnotationConfigApplicationContext;</span><br><span class="line"><span class="keyword">import</span> com.atguigu.ext.ExtConfig;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IOCTest_Ext</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line">		AnnotationConfigApplicationContext applicationContext  = <span class="keyword">new</span> AnnotationConfigApplicationContext(ExtConfig<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">		<span class="comment">//发布事件；</span></span><br><span class="line">		applicationContext.publishEvent(<span class="keyword">new</span> ApplicationEvent(<span class="keyword">new</span> String(<span class="string">"我发布的时间"</span>)) &#123;</span><br><span class="line">		&#125;);</span><br><span class="line">		applicationContext.close();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*注解版</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.ApplicationEvent;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.event.EventListener;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@EventListener</span>(classes=&#123;ApplicationEvent<span class="class">.<span class="keyword">class</span>&#125;)</span></span><br><span class="line"><span class="class">	<span class="title">public</span> <span class="title">void</span> <span class="title">listen</span>(<span class="title">ApplicationEvent</span> <span class="title">event</span>)</span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"UserService。。监听到的事件："</span>+event);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Maven</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ApplicationListener</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Maven技术栈//" class="article-tag-list-link color4">Maven技术栈</a>
+        			<a href="/categories/Spring技术栈//" class="article-tag-list-link color5">Spring技术栈</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Spring技术栈/Spring注解驱动//" class="article-tag-list-link color1">Spring注解驱动</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://guangxingblog.com/2020/08/05/Spring%E6%B3%A8%E8%A7%A3%E7%89%88%E5%AD%A6%E4%B9%A0-%E7%9B%91%E5%90%AC%E5%99%A8/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/08/03/Spring%E6%B3%A8%E8%A7%A3%E7%89%88%E5%AD%A6%E4%B9%A0-%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86-TX/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Spring注解版学习-事务管理(TX)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+  <div id="SOHUCS" sid="Spring注解版学习-监听器" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "cyuTnXVra",
+        conf: "prod_5f6f5511a3f96475bc72c281d2296d82"
+    });
+</script>
+</script>
+  
 
+  
+
+  
 
           </div>
         </div>
@@ -265,8 +497,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
