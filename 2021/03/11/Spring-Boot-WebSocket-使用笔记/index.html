@@ -16,7 +16,7 @@
 <meta property="og:description" content="&gt; 使用websocket有两种方式：一，使用sockjs，二，是使用h5的标准。使用Html5标准自然更方便简单，所以记录的是配合h5的使用方法。 pom文件  ​        核心是@ServerEndpoint这个注解。这个注解是Javaee标准里的注解，tomcat7以上已经对其进行了实现，如果是用传统方法使用tomcat发布项目，只要在pom文件中引入javaee标准即可使用。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-03-11T09:31:36.000Z">
-<meta property="article:modified_time" content="2021-03-11T09:59:01.984Z">
+<meta property="article:modified_time" content="2021-03-12T07:30:35.263Z">
 <meta property="article:author" content="Guangxing">
 <meta property="article:tag" content="Spring">
 <meta property="article:tag" content="SpringBoot">
@@ -228,7 +228,9 @@
 <p>​        但使用springboot的内置tomcat时，就不需要引入javaee-api了，spring-boot已经包含了。使用springboot的websocket功能首先引入springboot组件。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-websocket<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<ol start="2">
+<a id="more"></a>
+
+<ol>
 <li>使用@ServerEndpoint创立websocket endpoint </li>
 </ol>
 <p>​        首先要注入ServerEndpointExporter，这个bean会自动注册使用了@ServerEndpoint注解声明的Websocket endpoint。要注意，如果使用独立的servlet容器，而不是直接使用springboot的内置容器，就不要注入ServerEndpointExporter，因为它将由容器自己提供和管理。</p>
