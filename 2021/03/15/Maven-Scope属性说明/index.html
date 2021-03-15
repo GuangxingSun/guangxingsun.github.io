@@ -16,7 +16,7 @@
 <meta property="og:description" content="简单梳理一下基础知识  Scope属性依赖范围控制哪些依赖在哪些classpath 中可用，哪些依赖包含在一个应用中。  compile(编译)  compile是默认的范围；如果没有提供一个范围，那该依赖的范围就是编译范围。编译范围依赖在所有的classpath中可用，同时它们也会被打包。  provided(已提供)  provided 只有在当JDK 或者一个容器已提供该依赖之后才使用。例">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-03-15T09:00:58.000Z">
-<meta property="article:modified_time" content="2021-03-15T10:16:42.455Z">
+<meta property="article:modified_time" content="2021-03-15T10:18:58.612Z">
 <meta property="article:author" content="Guangxing">
 <meta property="article:tag" content="Maven">
 <meta property="article:tag" content="Java、">
@@ -235,6 +235,8 @@
 <li>runtime(运行时)</li>
 </ul>
 <p>runtime在运行和测试系统的时候需要，但是在编译的时候不需要。比如：系统在编译的时候只需要Jdbc API JAR,而只有在运行系统时候才需要JDBC。</p>
+<a id="more"></a>
+
 <ul>
 <li>test(测试)</li>
 </ul>
